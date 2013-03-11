@@ -1,7 +1,18 @@
 <?php
 
 class BaseController extends Controller {
-
+   
+   	/**
+	 * Initializer.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		// CSRF Protection
+		$this->beforeFilter('csrf', array('on' => 'post'));
+	}   
+   
 	/**
 	 * Setup the layout used by the controller.
 	 *
