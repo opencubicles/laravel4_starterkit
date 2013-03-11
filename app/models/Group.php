@@ -1,8 +1,8 @@
 <?php
 
-use Cartalyst\Sentry\Users\Eloquent\User as SentryUserModel;
+use Cartalyst\Sentry\Groups\Eloquent\Group as SentryGroupModel;
 
-class User extends SentryUserModel {
+class Group extends SentryGroupModel {
 
 	/**
 	 * Returns the user full name, it simply

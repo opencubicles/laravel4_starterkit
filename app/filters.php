@@ -24,26 +24,55 @@ App::after(function($request, $response)
 
 /*
 |--------------------------------------------------------------------------
-| Authentication Filters
+| Authentication filter.
 |--------------------------------------------------------------------------
 |
-| The following filters are used to verify that the user of the current
-| session is logged into this application. Also, a "guest" filter is
-| responsible for performing the opposite. Both provide redirects.
+| This filter is usefull to verify if the user of the current session is
+| logged into the application.
 |
 */
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::route('login');
+	// Check if the user is logged in
+	if ( ! Sentry::check())
+	{
+		// Store the current uri in the session
+		Session::put('loginRedirect', Request::url());
+
+		// Redirect to the login page
+		return Redirect::to('account/login');
+	}
 });
+/*
+|--------------------------------------------------------------------------
+| Admin authentication filter.
+|--------------------------------------------------------------------------
+|
+| This filter does the same as the 'auth' filter but it checks if the user
+| has 'admin' privileges.
+|
+*/
 
-
-Route::filter('guest', function()
+Route::filter('admin-auth', function()
 {
-	if (Auth::check()) return Redirect::to('/');
-});
+	// Check if the user is logged in
+	if ( ! Sentry::check())
+	{
+		// Store the current uri in the session
+		Session::put('loginRedirect', Request::url());
 
+		// Redirect to the login page
+		return Redirect::to('account/login');
+	}
+
+	// Check if the user has access to the admin page
+	if ( ! Sentry::getUser()->hasAccess('admin'))
+	{
+		// Show the insufficient permissions page
+		return View::make('error/403');
+	}
+});
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter
