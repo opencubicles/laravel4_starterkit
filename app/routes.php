@@ -67,3 +67,10 @@ Route::post('account/settings', 'AccountSettingsController@postIndex');
 # Dashboard
 Route::get('account', 'AccountDashboardController@getIndex');
 
+# routes for handling social authentication via opauth 
+Route::get('social/auth/{network?}', 'SocialController@auth');
+Route::get('social/callback', 'SocialController@callback');
+
+Route::get('social/auth/{network?}/int_callback', 'SocialController@auth');
+Route::get('social/auth/{network?}/oauth2callback', 'SocialController@auth');
+Route::get('social/auth/{network?}/oauth_callback', 'SocialController@auth');
