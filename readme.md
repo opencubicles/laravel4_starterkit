@@ -10,6 +10,7 @@
 
 ### License
 
+
 The Laravel framework is open-sourced software license under the [MIT license](http://opensource.org/licenses/MIT)
 
 ##Laravel 4 - Starter Kit
@@ -104,3 +105,6 @@ For any issues, feel free to drop an email to opencubicles@gmail.com
 
 ###LICENSE
 DBAD LICENSE
+=======
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+

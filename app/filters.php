@@ -54,7 +54,9 @@ Route::filter('auth', function()
 |
 */
 
+
 Route::filter('admin-auth', function()
+
 {
 	// Check if the user is logged in
 	if ( ! Sentry::check())
