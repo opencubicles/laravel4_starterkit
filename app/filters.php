@@ -34,11 +34,13 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
+
 	// Check if the user is logged in
 	if ( ! Sentry::check())
 	{
 		// Store the current uri in the session
 		Session::put('loginRedirect', Request::url());
+
 
 		// Redirect to the login page
 		return Redirect::to('account/login');
@@ -88,7 +90,7 @@ Route::filter('admin-auth', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::getToken() != Input::get('_token'))
+	if (Session::token() != Input::get('_token'))
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
